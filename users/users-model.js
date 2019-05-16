@@ -3,7 +3,7 @@ const db = require('../data/dbConfig');
 module.exports = {
     getUsers,
     addUser,
-    deleteUser
+    // deleteUser
 }
 
 function getUsers() {
