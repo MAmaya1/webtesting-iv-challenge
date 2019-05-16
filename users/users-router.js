@@ -2,6 +2,8 @@ const router = require('express').Router();
 
 const Users = require('../users/users-model');
 
+// Get users
+
 router.get('/', (req, res) => {
     Users.getUsers()
         .then(users => {
@@ -11,6 +13,24 @@ router.get('/', (req, res) => {
             res.status(500).json({ error: err, message: 'Users could not be retrieved from database.' })
         })
 })
+
+// Get user by ID
+
+router.get('/:id', (req, res) => {
+    Users.getUserById(req.params.id)
+        .then(user => {
+            if(user) {
+                res.status(200).json(user)
+            } else {
+                res.status(404).json({ errorMessage: 'A user with the specified ID does not exist.'})
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ error: err, message: 'Could not retrieve user from database.' })
+        })
+})
+
+// Add new user
 
 router.post('/', (req, res) => {
     if (!req.body.name || !req.body.email) {
@@ -25,5 +45,9 @@ router.post('/', (req, res) => {
             })
     }
 })
+
+// Delete user
+
+router.delete('/:id', )
 
 module.exports = router;

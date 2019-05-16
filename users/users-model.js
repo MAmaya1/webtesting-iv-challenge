@@ -3,6 +3,7 @@ const db = require('../data/dbConfig');
 module.exports = {
     getUsers,
     addUser,
+    getUserById
     // deleteUser
 }
 
@@ -23,3 +24,9 @@ function addUser(user) {
             return getUserById(id)
         })
 }
+
+// function deleteUser(id) {
+//     return db('users')
+//         .where({id})
+//         .del()
+// }
