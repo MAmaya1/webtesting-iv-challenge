@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     Users.getUserById(req.params.id)
         .then(user => {
-            if(user) {
+            if (user) {
                 res.status(200).json(user)
             } else {
                 res.status(404).json({ errorMessage: 'A user with the specified ID does not exist.'})
@@ -48,6 +48,21 @@ router.post('/', (req, res) => {
 
 // Delete user
 
-router.delete('/:id', )
+router.delete('/:id', (req, res) => {
+    Users.getUserById(req.params.id)
+        .then(user => {
+            if (user) {
+                Users.deleteUser(req.params.id)
+                    .then(() => {
+                        res.status(200).end();
+                    })
+                    .catch(err => {
+                        res.status(500).json({ error: err, message: 'User could not be deleted.' })
+                    })
+            } else {
+                res.status(400).json({ message: 'A user with the specified ID does not exist.' })
+            }
+        })
+})
 
 module.exports = router;
