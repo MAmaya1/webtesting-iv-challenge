@@ -17,7 +17,7 @@ server.use(helmet());
 // Configure Routes
 
 server.get('/', (req, res) => {
-    res.send('Hi there!');
+    res.status(200).json({ api: 'Good!'});
 })
 
 server.use('/api/users', usersRouter);
