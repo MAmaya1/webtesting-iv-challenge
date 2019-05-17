@@ -34,7 +34,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     if (!req.body.name || !req.body.email) {
-        res.status(400).json({ errorMessage: 'A username and email are required.' })
+        res.status(422).json({ errorMessage: 'A username and email are required.' })
     } else {
         Users.addUser(req.body)
             .then(user => {
